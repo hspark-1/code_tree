@@ -7,9 +7,9 @@ public class Main {
     static boolean[][] isVisited;
     static int min;
 
-    public static int solution(int x, int y, int depth, List<int[]> routes) {
+    public static int solution(int x, int y, int depth) {
         isVisited[x][y] = true;
-        if (x+1 == n && y+1 == m) return routes.size();
+        if (x+1 == n && y+1 == m) return depth;
         int[][] directions = {{0,1}, {-1,0}, {1,0}, {0,-1}};
         
         for (int[] direction : directions) {
@@ -17,10 +17,8 @@ public class Main {
             int ny = y + direction[1];
 
             if (nx >= 0 && ny >= 0 && nx < n && ny < m && !isVisited[nx][ny] && arr[nx][ny] == 1) {
-                routes.add(new int[]{nx, ny});
-                int a = solution(nx, ny, depth+1, routes);
+                int a = solution(nx, ny, depth+1);
                 if (min > a && a > 0) min = a;
-                routes.remove(routes.size() - 1);
             }
         }
 
@@ -43,8 +41,7 @@ public class Main {
         }
 
         isVisited = new boolean[n][m];
-        List<int[]> routes = new ArrayList<>();
-        solution(0, 0, 0, routes);
+        solution(0, 0, 0);
         System.out.print(isVisited[n-1][m-1]?min:-1);
     }
 }
