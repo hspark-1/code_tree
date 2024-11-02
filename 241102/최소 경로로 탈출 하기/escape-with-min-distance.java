@@ -7,26 +7,25 @@ public class Main {
     static boolean[][] isVisited;
     static int min;
 
-    public static int solution(int x, int y, int depth) {
+    public static int solution(int x, int y, int depth, List<int[]> routes) {
         isVisited[x][y] = true;
-        int nDepth = depth++;
-        if (x+1 == n && y+1 == m) return nDepth;
+        if (x+1 == n && y+1 == m) return routes.size();
         int[][] directions = {{0,1}, {-1,0}, {1,0}, {0,-1}};
-
-        for (int[] direction:directions) {
+        
+        for (int[] direction : directions) {
             int nx = x + direction[0];
             int ny = y + direction[1];
 
             if (nx >= 0 && ny >= 0 && nx < n && ny < m && !isVisited[nx][ny] && arr[nx][ny] == 1) {
-                int a = solution(nx, ny, depth);
-                if (a > nDepth) {
-                    nDepth = a;
-                    if (min > nDepth && isVisited[n-1][m-1]) min = nDepth;
-                }
+                routes.add(new int[]{nx, ny});
+                int a = solution(nx, ny, depth+1, routes);
+                if (min > a && a > 0) min = a;
+                routes.remove(routes.size() - 1);
             }
         }
 
-        return isVisited[n-1][m-1] ? min : -1;
+        isVisited[x][y] = false;
+        return -1;
     }
 
     public static void main(String[] args) throws IOException {
@@ -44,7 +43,8 @@ public class Main {
         }
 
         isVisited = new boolean[n][m];
-        solution(0, 0, 0);
+        List<int[]> routes = new ArrayList()<>;
+        solution(0, 0, 0, routes);
         System.out.print(isVisited[n-1][m-1]?min:-1);
     }
 }
