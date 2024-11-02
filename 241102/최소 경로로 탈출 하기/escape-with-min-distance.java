@@ -19,6 +19,7 @@ public class Main {
             if (nx >= 0 && ny >= 0 && nx < n && ny < m && !isVisited[nx][ny] && arr[nx][ny] == 1) {
                 int a = solution(nx, ny, depth+1);
                 if (min > a && a > 0) min = a;
+                if (isVisited[n-1][m-1]) return -1;
             }
         }
 
