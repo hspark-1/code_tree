@@ -44,6 +44,7 @@ public class Main {
         }
 
         isVisited = new boolean[n][m];
-        System.out.print(solution(0, 0, 0));
+        solution(0, 0, 0);
+        System.out.print(isVisited[n-1][m-1]?min:-1);
     }
 }
