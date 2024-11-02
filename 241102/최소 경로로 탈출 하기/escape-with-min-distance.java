@@ -11,7 +11,7 @@ public class Main {
         isVisited[x][y] = true;
         int nDepth = depth++;
         if (x+1 == n && y+1 == m) return nDepth;
-        int[][] directions = {{0,1}, {0,-1}, {1,0}, {-1,0}};
+        int[][] directions = {{0,1}, {-1,0}, {1,0}, {0,-1}};
 
         for (int[] direction:directions) {
             int nx = x + direction[0];
