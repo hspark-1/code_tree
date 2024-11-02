@@ -26,7 +26,7 @@ public class Main {
             }
         }
 
-        return min;
+        return isVisited[n-1][m-1] ? min : -1;
     }
 
     public static void main(String[] args) throws IOException {
