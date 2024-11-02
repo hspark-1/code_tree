@@ -6,12 +6,11 @@ public class Main {
     static int[][] arr;
     static boolean[][] isVisited;
     static int min;
-    static int[][] directions = {{0,1}, {-1,0}, {1,0}, {0,-1}};
 
     public static int solution(int x, int y, int depth) {
         isVisited[x][y] = true;
         if (x+1 == n && y+1 == m) return depth;
-        
+        int[][] directions = {{0,1}, {-1,0}, {1,0}, {0,-1}};
         for (int[] direction : directions) {
             int nx = x + direction[0];
             int ny = y + direction[1];
