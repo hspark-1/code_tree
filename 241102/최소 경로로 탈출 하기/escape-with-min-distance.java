@@ -43,7 +43,7 @@ public class Main {
         }
 
         isVisited = new boolean[n][m];
-        List<int[]> routes = new ArrayList()<>;
+        List<int[]> routes = new ArrayList<>();
         solution(0, 0, 0, routes);
         System.out.print(isVisited[n-1][m-1]?min:-1);
     }
