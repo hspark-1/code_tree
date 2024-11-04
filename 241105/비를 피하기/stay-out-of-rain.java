@@ -4,6 +4,7 @@ import java.io.*;
 public class Main {
     public static int n, h, m;
     public static int[][] arr;
+    public static int[][] result;
     public static boolean[][] isVisited;
     public static Queue<int[]> q = new LinkedList<>();
 
@@ -21,7 +22,7 @@ public class Main {
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
                     if (arr[nx][ny] == 3) return depth;
-                    else if (arr[nx][ny] == 0) {
+                    else if (arr[nx][ny] != 1) {
                         q.add(new int[]{nx, ny});
                     }
                 }
@@ -37,7 +38,7 @@ public class Main {
                 if (arr[i][j] == 2) {
                     isVisited = new boolean[n][n];
                     q.add(new int[]{i, j});
-                    arr[i][j] = bfs(0);
+                    result[i][j] = bfs(0);
                 }
             }
         }
@@ -58,7 +59,7 @@ public class Main {
 
         solution();
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print(((arr[i][j] == 3 || arr[i][j] == 1) ? 0 : arr[i][j]) + " ");
+            for (int j=0; j<n; j++) System.out.print(result[i][j] + " ");
             System.out.println();
         }
     }
