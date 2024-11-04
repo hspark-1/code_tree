@@ -8,10 +8,9 @@ public class Main {
     public static boolean[][] isVisited;
     public static Queue<int[]> q = new LinkedList<>();
 
-    public static int bfs(int depth) {
+    public static int bfs() {
         while(!q.isEmpty()) {
             int[] curr = q.poll();
-            depth++;
             int x = curr[0], y = curr[1];
             isVisited[x][y] = true;
             int[][] directions = {{0,1}, {0,-1}, {1,0}, {-1,0}};
@@ -21,8 +20,9 @@ public class Main {
                 int ny = y + direction[1];
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
-                    if (arr[nx][ny] == 3) return depth;
+                    if (arr[nx][ny] == 3) return result[x][y];
                     else if (arr[nx][ny] != 1) {
+                        result[nx][ny] = result[x][y] + 1;
                         q.add(new int[]{nx, ny});
                     }
                 }
@@ -37,8 +37,10 @@ public class Main {
             for (int j=0; j<n; j++) {
                 if (arr[i][j] == 2) {
                     isVisited = new boolean[n][n];
+                    result = new int[n][n];
+                    result[i][j] = arr[i][j] - 1;
                     q.add(new int[]{i, j});
-                    result[i][j] = bfs(0);
+                    arr[i][j] = bfs();
                 }
             }
         }
@@ -52,7 +54,6 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         arr = new int[n][n];
-        result = new int[n][n];
         for (int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j=0; j<n; j++) arr[i][j] = Integer.parseInt(st.nextToken());
@@ -60,7 +61,7 @@ public class Main {
 
         solution();
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print(result[i][j] + " ");
+            for (int j=0; j<n; j++) System.out.print(((arr[i][j] == 3 || arr[i][j] == 1) ? 0 : arr[i][j]) + " ");
             System.out.println();
         }
     }
