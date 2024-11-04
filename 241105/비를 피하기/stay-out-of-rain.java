@@ -21,7 +21,7 @@ public class Main {
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
                     if (arr[nx][ny] == 3) return depth;
-                    else if (arr[nx][ny] != 1) {
+                    else if (arr[nx][ny] == 0) {
                         q.add(new int[]{nx, ny});
                     }
                 }
