@@ -37,6 +37,11 @@ public class Main {
         end[0] = Integer.parseInt(st.nextToken());
         end[1] = Integer.parseInt(st.nextToken());
 
+        if (Arrays.equals(start, end)) {
+            System.out.println(0);
+            return;
+        }
+
         q.add(new int[]{start[0]-1, start[1]-1});
         bfs();
 
