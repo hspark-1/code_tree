@@ -20,10 +20,10 @@ public class Main {
                 int ny = y + direction[1];
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
-                    if (arr[nx][ny] == 3) return result[x][y];
+                    if (arr[nx][ny] == 3) return arr[x][y] - 1;
                     else if (arr[nx][ny] != 1) {
-                        result[nx][ny] = result[x][y] + 1;
                         q.add(new int[]{nx, ny});
+                        arr[nx][ny] = arr[x][y] + 1;
                     }
                 }
             }
@@ -36,11 +36,12 @@ public class Main {
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
                 if (arr[i][j] == 2) {
+                    int[][] cpArr = new int[n][n];
+                    for (int k=0; k<n; k++) cpArr[k] = Arrays.copyOf(arr[k], n);
                     isVisited = new boolean[n][n];
-                    result = new int[n][n];
-                    result[i][j] = arr[i][j] - 1;
                     q.add(new int[]{i, j});
-                    arr[i][j] = bfs();
+                    result[i][j] = bfs();
+                    arr = cpArr;
                 }
             }
         }
@@ -54,6 +55,7 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         arr = new int[n][n];
+        result = new int[n][n];
         for (int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j=0; j<n; j++) arr[i][j] = Integer.parseInt(st.nextToken());
@@ -61,7 +63,7 @@ public class Main {
 
         solution();
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print(((arr[i][j] == 3 || arr[i][j] == 1) ? 0 : arr[i][j]) + " ");
+            for (int j=0; j<n; j++) System.out.print(result[i][j] + " ");
             System.out.println();
         }
     }
