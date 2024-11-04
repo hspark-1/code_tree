@@ -52,6 +52,7 @@ public class Main {
         m = Integer.parseInt(st.nextToken());
 
         arr = new int[n][n];
+        result = new int[n][n];
         for (int i=0; i<n; i++) {
             st = new StringTokenizer(br.readLine());
             for (int j=0; j<n; j++) arr[i][j] = Integer.parseInt(st.nextToken());
