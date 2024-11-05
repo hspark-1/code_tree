@@ -62,7 +62,7 @@ public class Main {
 
         solution();
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print((arr[i][j] == 2 ? result[i][j] : 0) + " ");
+            for (int j=0; j<n; j++) System.out.print((arr[i][j] == 2 ? (result[i][j] == 0 ? -1 : result[i][j]) : 0) + " ");
             System.out.println();
         }
     }
