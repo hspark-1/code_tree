@@ -8,7 +8,7 @@ public class Main {
     public static boolean[][] isVisited;
     public static Queue<int[]> q = new LinkedList<>();
 
-    public static int bfs() {
+    public static int bfs(int[][] cpArr) {
         while(!q.isEmpty()) {
             int[] curr = q.poll();
             int x = curr[0], y = curr[1];
@@ -20,8 +20,8 @@ public class Main {
                 int ny = y + direction[1];
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
-                    if (arr[nx][ny] == 3) return arr[x][y] - 1;
-                    else if (arr[nx][ny] != 1) {
+                    if (cpArr[nx][ny] == 3) return arr[x][y] - 1;
+                    else if (cpArr[nx][ny] != 1) {
                         q.add(new int[]{nx, ny});
                         arr[nx][ny] = arr[x][y] + 1;
                     }
@@ -40,11 +40,7 @@ public class Main {
                     for (int k=0; k<n; k++) cpArr[k] = arr[k].clone();
                     isVisited = new boolean[n][n];
                     q.add(new int[]{i, j});
-                    result[i][j] = bfs();
-                    for (int k=0; k<n; k++) {
-                        for (int l=0; l<n; l++) System.out.print(arr[k][l] + " ");
-                        System.out.println();
-                    }
+                    result[i][j] = bfs(cpArr);
                     arr = cpArr;
                 }
             }
