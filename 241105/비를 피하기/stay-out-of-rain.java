@@ -42,7 +42,7 @@ public class Main {
                     q.add(new int[]{i, j});
                     result[i][j] = bfs();
                     for (int k=0; k<n; k++) {
-                        for (int j=0; j<n; j++) System.out.print(arr[i][j] + " ");
+                        for (int l=0; l<n; l++) System.out.print(arr[k][l] + " ");
                         System.out.println();
                     }
                     arr = cpArr;
