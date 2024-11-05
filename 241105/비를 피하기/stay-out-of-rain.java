@@ -23,7 +23,7 @@ public class Main {
                     if (arr[nx][ny] == 3) return result[x][y] - 1;
                     else if (arr[nx][ny] != 1) {
                         q.add(new int[]{nx, ny});
-                        result[nx][ny] = result[x][y] + 1;
+                        if (result[nx][ny] > result[x][y] + 1) result[nx][ny] = result[x][y] + 1;
                     }
                 }
             }
