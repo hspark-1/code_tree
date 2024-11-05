@@ -37,7 +37,7 @@ public class Main {
             for (int j=0; j<n; j++) {
                 if (arr[i][j] == 2) {
                     int[][] cpArr = new int[n][n];
-                    for (int k=0; k<n; k++) cpArr[k] = Arrays.copyOf(arr[k], n);
+                    for (int k=0; k<n; k++) cpArr[k] = arr[k].clone();
                     isVisited = new boolean[n][n];
                     q.add(new int[]{i, j});
                     result[i][j] = bfs();
