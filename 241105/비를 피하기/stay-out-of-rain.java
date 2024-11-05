@@ -8,7 +8,7 @@ public class Main {
     public static boolean[][] isVisited;
     public static Queue<int[]> q = new LinkedList<>();
 
-    public static int bfs(int[][] cpArr) {
+    public static int bfs() {
         while(!q.isEmpty()) {
             int[] curr = q.poll();
             int x = curr[0], y = curr[1];
@@ -20,10 +20,10 @@ public class Main {
                 int ny = y + direction[1];
 
                 if (nx >= 0 && ny >= 0 && nx < n && ny < n && !isVisited[nx][ny]) {
-                    if (cpArr[nx][ny] == 3) return arr[x][y] - 1;
-                    else if (cpArr[nx][ny] != 1) {
+                    if (arr[nx][ny] == 3) return result[x][y] - 1;
+                    else if (arr[nx][ny] != 1) {
                         q.add(new int[]{nx, ny});
-                        arr[nx][ny] = arr[x][y] + 1;
+                        result[nx][ny] = result[x][y] + 1;
                     }
                 }
             }
@@ -33,18 +33,17 @@ public class Main {
     }
 
     public static void solution() {
+        isVisited = new boolean[n][n];
         for (int i=0; i<n; i++) {
             for (int j=0; j<n; j++) {
-                if (arr[i][j] == 2) {
-                    int[][] cpArr = new int[n][n];
-                    for (int k=0; k<n; k++) cpArr[k] = arr[k].clone();
-                    isVisited = new boolean[n][n];
+                if (arr[i][j] == 3) {
                     q.add(new int[]{i, j});
-                    result[i][j] = bfs(cpArr);
-                    arr = cpArr;
+                    isVisited[i][j] = true;
+                    // arr[i][j] = 0;
                 }
             }
         }
+        bfs();
     }
     public static void main(String[] args) throws IOException {
         // 여기에 코드를 작성해주세요.
@@ -63,7 +62,7 @@ public class Main {
 
         solution();
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print(result[i][j] + " ");
+            for (int j=0; j<n; j++) System.out.print((arr[i][j] == 2 ? result[i][j] : 0) + " ");
             System.out.println();
         }
     }
