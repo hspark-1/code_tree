@@ -41,7 +41,7 @@ public class Main {
                     isVisited = new boolean[n][n];
                     q.add(new int[]{i, j});
                     result[i][j] = bfs();
-                    for (int i=0; i<n; i++) {
+                    for (int k=0; k<n; k++) {
                         for (int j=0; j<n; j++) System.out.print(arr[i][j] + " ");
                         System.out.println();
                     }
