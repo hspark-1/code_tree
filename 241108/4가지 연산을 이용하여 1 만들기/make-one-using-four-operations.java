@@ -9,14 +9,14 @@ public class Main {
     public static int bfs() {
         while(!q.isEmpty()) {
             int[] curr = q.poll();
-            if (N < curr[0]) continue;
+            if (N+1 < curr[0]) continue;
             if (curr[0] == 1) return curr[1];
 
             int n, depth;
             depth = curr[1] + 1;
 
-            if (curr[0] % 3 == 0) {
-                n = curr[0] / 3;
+            if (curr[0] != N + 2) {
+                n = curr[0] + 1;
                 if (dp[n] == 0) {
                     q.add(new int[]{n, depth});
                     dp[n] = depth;
@@ -30,9 +30,9 @@ public class Main {
                     dp[n] = depth;
                 }
             }
-            
-            n = curr[0] + 1;
-            if (!(n > N)) {
+
+            if (curr[0] % 3 == 0) {
+                n = curr[0] / 3;
                 if (dp[n] == 0) {
                     q.add(new int[]{n, depth});
                     dp[n] = depth;
@@ -53,10 +53,10 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
-        dp = new int[N+1];
+        dp = new int[N + 3];
 
-        q.add(new int[]{N, 0});
-        dp[N] = 0;
-        System.out.println(bfs());
+        q.add(new int[]{N, 1});
+        dp[N] = 1;
+        System.out.println(bfs() - 1);
     }
 }
