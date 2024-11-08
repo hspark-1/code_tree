@@ -10,20 +10,22 @@ public class Main {
             if (curr[0] == 1) return curr[1];
 
             int n, depth;
-
-            n = curr[0] + 1;
             depth = curr[1] + 1;
-            q.add(new int[]{n, depth});
-
-            if (curr[0] % 2 == 0) {
-                n = curr[0] / 2;
-                q.add(new int[]{n, depth});
-            }
 
             if (curr[0] % 3 == 0) {
                 n = curr[0] / 3;
                 q.add(new int[]{n, depth});
+                continue;
             }
+
+            if (curr[0] % 2 == 0) {
+                n = curr[0] / 2;
+                q.add(new int[]{n, depth});
+                continue;
+            }
+
+            n = curr[0] + 1;
+            q.add(new int[]{n, depth});
 
             n = curr[0] - 1;
             q.add(new int[]{n, depth});
