@@ -8,6 +8,7 @@ public class Main {
     public static int dp(int n) {
         if (n == 2) return 1;
         if (n == 3) return 1;
+        if (n == 1) return 0;
         return dp(n-2) + dp(n-3);
     }
 
