@@ -10,7 +10,7 @@ public class Main {
         if (n == 3) return 1;
         if (n == 1) return 0;
         if (note[n] == 0) {
-            note[n] = dp(n-2) + dp(n-3);
+            note[n] = (dp(n-2) + dp(n-3)) % 10007;
             return note[n];
         } else return note[n];
     }
