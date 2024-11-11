@@ -8,8 +8,9 @@ public class Main {
     public static long dp(int n) {
         if (n == 1) return 2;
         if (n == 2) return 7;
+        if (n == 3) return 22;
         if (n == 0) return 0;
-        if (note[n] == 0) note[n] = (dp(n-1) * 2 + dp(n-2) * 3 + dp(n-3) + 2) % 1000000007;
+        if (note[n] == 0) note[n] = (dp(n-1) * 2 + dp(n-2) * 3 + dp(n-3) * 2 + 2) % 1000000007;
         return note[n];
     }
 
@@ -18,7 +19,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         num = Integer.parseInt(st.nextToken());
-        note = new long[num + 1];
+        note = new long[Math.max(num + 1, 4)];
 
         System.out.print(dp(num));
     }
