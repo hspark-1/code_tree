@@ -9,7 +9,7 @@ public class Main {
         if (n == 1) return 2;
         if (n == 2) return 7;
         if (n == 0) return 0;
-        if (note[n] == 0) note[n] = (dp(n-1) * 2 + dp(n-2) * 3 + dp(n-3) + 2) % 10007;
+        if (note[n] == 0) note[n] = (dp(n-1) * 2 + dp(n-2) * 3 + dp(n-3) + 2) % 1000000007;
         return note[n];
     }
 
