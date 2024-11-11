@@ -21,7 +21,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         N = Integer.parseInt(st.nextToken());
-        note = new int[N*N];
+        note = new int[Math.max(N*N, 3)];
         note[1] = 1;
         note[2] = 1;
         fibo(3);
