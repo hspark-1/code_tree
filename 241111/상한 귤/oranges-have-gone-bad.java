@@ -45,7 +45,7 @@ public class Main {
         bfs();
 
         for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) System.out.print((result[i][j] == 0 && arr[i][j] == 1) ? -2 : result[i][j] + " ");
+            for (int j=0; j<n; j++) System.out.print(((result[i][j] == 0 && arr[i][j] == 1) ? -2 : result[i][j]) + " ");
             System.out.println();
         }
     }
