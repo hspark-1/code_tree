@@ -3,9 +3,9 @@ import java.io.*;
 
 public class Main {
     public static int n;
-    public static int[] note;
+    public static long[] note;
 
-    public static int dp(int n) {
+    public static long dp(int n) {
         if (note[n] == 0) {
             if (n == 2) return 1;
             if (n == 3) return 1;
@@ -20,7 +20,7 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         n = Integer.parseInt(st.nextToken());
-        note = new int[n+1];
+        note = new long[n+1];
 
         System.out.print(dp(n));
     }
