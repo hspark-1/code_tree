@@ -6,7 +6,7 @@ public class Main {
     public static int N;
 
     public static void fibo(int n) {
-        if (n-1 == N) {
+        if (n-1 >= N) {
             System.out.println(note[N]);
             return;
         } else {
