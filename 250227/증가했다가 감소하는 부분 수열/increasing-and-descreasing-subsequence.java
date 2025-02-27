@@ -2,64 +2,45 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static int N;
-    public static int[] arr, inverseArr;
-    public static int[] note, inverseNote;
-
     public static void main(String[] args) throws IOException {
-        // Please write your code here.
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
+        int[] arr = new int[N];
+        int[] note = new int[N];        // LIS
+        int[] inverseNote = new int[N]; // LDS
 
-        arr = new int[N];
-        note = new int[N];
-        inverseArr = new int[N];
-        inverseNote = new int[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i=0; i<N; i++) {
+        for (int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
-            inverseArr[N - 1 - i] = arr[i];
         }
 
-        for (int i=1; i<N; i++) {
-            for (int j=0; j<i; j++) {
-                if (note[j] == Integer.MIN_VALUE)
-                    continue;
-                if (arr[j] < arr[i])
+        Arrays.fill(note, 1);
+        Arrays.fill(inverseNote, 1);
+
+        // LIS 계산
+        for (int i = 1; i < N; i++) {
+            for (int j = 0; j < i; j++) {
+                if (arr[j] < arr[i]) {
                     note[i] = Math.max(note[i], note[j] + 1);
+                }
             }
         }
 
-        for (int i=1; i<N; i++) {
-            for (int j=0; j<i; j++) {
-                if (inverseNote[j] == Integer.MIN_VALUE)
-                    continue;
-                if (inverseArr[j] < inverseArr[i])
+        // LDS 계산 (기존 arr을 뒤에서 탐색)
+        for (int i = N - 2; i >= 0; i--) {
+            for (int j = N - 1; j > i; j--) {
+                if (arr[i] > arr[j]) {
                     inverseNote[i] = Math.max(inverseNote[i], inverseNote[j] + 1);
+                }
             }
         }
 
-        int ans = 0, idx = 0;
-        for (int i=0; i<N; i++) {
-            if (ans == note[i]) continue;
-            ans = Math.max(ans, note[i]);
-            if (ans == note[i]) idx = i;
-        }
-        
-        int inverseAns = 0, inverseIdx = 0;
-        for (int i=0; i<N; i++) {
-            if (inverseAns == inverseNote[i]) continue;
-            inverseAns = Math.max(inverseAns, inverseNote[i]);
-            if (inverseAns == inverseNote[i]) inverseIdx = i;
+        // 최장 증가-감소 부분 수열 찾기
+        int maxLength = 0;
+        for (int i = 0; i < N; i++) {
+            maxLength = Math.max(maxLength, note[i] + inverseNote[i] - 1);
         }
 
-        if (!(idx > (N - 1 - inverseIdx))) {
-            if (arr[idx] == inverseArr[inverseIdx]) System.out.print(ans + inverseAns + 1);
-            else System.out.print("Test Case");
-        } else {
-            // System.out.println(inverseNote[N - 1 - idx]);
-            // System.out.println("ans : " + ans + ", inverse ans : " + inverseAns);
-            System.out.print(Math.max((Math.max(ans, inverseAns) + 1), (inverseNote[N - 1 - idx] + ans + 1)));
-        }
+        System.out.println(maxLength);
     }
 }
